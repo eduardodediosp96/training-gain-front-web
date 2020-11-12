@@ -1,32 +1,76 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
-  </div>
+  <v-app id="test">
+    <v-container
+      grid-list-md
+      text-md-center
+      fluid
+      style="max-height:100vh;padding-top:0px;padding-bottom:0px"
+    >
+      <Navbar />
+      <v-row style="background-color:#1E203D;">
+        <v-col class="sidebar" cols="2">
+          <Sidebar />
+        </v-col>
+        <v-col class="wrapper">
+          <v-main class="content" scrollable>
+            <router-view></router-view>
+          </v-main>
+        </v-col>
+      </v-row>
+      <Footer />
+    </v-container>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script lang="ts">
+import Vue from "vue";
+import HelloWorld from "./components/HelloWorld.vue";
+import Sidebar from "./components/Sidebar.vue";
+import Navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue";
+
+export default Vue.extend({
+  name: "App",
+
+  components: {
+    Sidebar,
+    Navbar,
+    Footer,
+  },
+
+  data: () => ({}),
+});
+</script>
+
+<style lang="scss" scoped>
+html {
+  overflow: hidden !important;
 }
 
-#nav {
-  padding: 30px;
+.v-app {
+  max-height: 100vh;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+.sidebar,
+.wrapper {
+  padding: 0px;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.v-col,
+.v-row,
+.content {
+  max-height: 100%;
+}
+.content {
+  overflow-y: auto;
+  height: 85vh !important;
+}
+.navbar {
+  overflow-y: auto;
+  min-height: 5vh !important;
+}
+.footer {
+  overflow-y: auto;
+  min-height: 10vh !important;
 }
 </style>
